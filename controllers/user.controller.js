@@ -15,13 +15,8 @@ async function createUser(req, res) {
 
 async function getUser (req, res, next) {
     try{
-        // const user = await User.findOne();
-        const user = {
-            slackUsername: "Raphdoo",
-            age: 27,
-            backend: true,
-            bio: "A software developer who is fascinated about building sustainable solutions using technology."
-        }
+        const user = await User.findOne();
+    
         res.setHeader('Content-Type', "application/json")
         res.status(200).send(user)        
     }catch(err){
