@@ -8,7 +8,9 @@ var usersRouter = require('./routes/user.route');
 
 connectToDatabase()
 app.use(express.json())
-app.use(cors())
+app.use(cors({
+    origin: '*'
+}));
 
 app.use('/', usersRouter);
 
