@@ -15,7 +15,7 @@ async function createUser(req, res) {
 
 async function getUser (req, res, next) {
     try{
-        const user = await User.findOne();
+        const user = await User.findOne().select({ slackUsername: 1, _id: 0, backend:1, age:1, bio:1 })
     
         res.setHeader('Content-Type', "application/json")
         res.status(200).send(user)        
