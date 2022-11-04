@@ -24,10 +24,18 @@ async function createPost(req, res) {
 
   res.setHeader('Content-Type', "application/json")
   res.status(200).send(post)
-
-
 }
 
+async function getPost (req, res, next) {
+        try{
+            const post = await Post.findOne().select({ operation_type: 1, _id: 0, x:1, y:1, slackUsername:1, result:1 })
+        
+            res.setHeader('Content-Type', "application/json")
+            res.status(200).send(post)        
+        }catch(err){
+            res.status(500).json({err:err, status:false})
+        }
+    }
 
 
 // async function createUser(req, res) {
@@ -56,5 +64,6 @@ async function createPost(req, res) {
 module.exports = {
     // createUser,
     // getUser,
-    createPost
+    createPost,
+    getPost
 }
