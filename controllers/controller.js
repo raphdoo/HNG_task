@@ -23,7 +23,7 @@ async function createPost(req, res) {
   await post.save()
 
   res.setHeader('Content-Type', "application/json")
-  res.status(201).send(post)
+  res.status(204).send(post)
 }
 
 async function getPost (req, res, next) {
