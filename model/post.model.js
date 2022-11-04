@@ -6,6 +6,7 @@ const Schema = mongoose.Schema
 const PostSchema = new Schema({
     operation_type:{
         type: String,
+        required: true,
         enum: ["addition", "subtraction", "multiplication"]
     },
     x:{
@@ -19,7 +20,9 @@ const PostSchema = new Schema({
         default: "Raphdoo"
     },
     result:{
-        type:Number
+        type:Number,
+        required: true,
+        default:0
     }
 })
 

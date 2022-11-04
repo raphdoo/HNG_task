@@ -20,7 +20,7 @@ async function createPost(req, res) {
   const newPost = await Post.findOne({_id: post._id}).select({ operation_type: 1, _id: 0, slackUsername:1, result:1 })
 
   res.setHeader('Content-Type', "application/json")
-  res.status(201).send(newPost)
+  res.status(201).json({newPost})
 }
 
 // async function getPost (req, res, next) {
