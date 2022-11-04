@@ -4,38 +4,36 @@ const Post = require('../model/post.model')
 const bodyParser = require("body-parser")
 
 async function createPost(req, res) {
-    let result;
-    const post = new Post({
-        operation_type: "addition",
-        x: 4,
-        y: 5,
-        slackUsername: "Raphdoo",
-  });
+    const post = await Post.create(req.body);
+
   if(post.operation_type == 'addition'){
     post.result = post.x + post.y
   }
   if(post.operation_type == 'subtraction'){
-    result = post.x - post.y
+    post.result = post.x - post.y
   }
   if(post.operation_type == 'multiplication'){
     post.result = post.x * post.y
   } 
   await post.save()
 
+  const newPost = await Post.findOne({_id: post._id}).select({ operation_type: 1, _id: 0, slackUsername:1, result:1 })
+
   res.setHeader('Content-Type', "application/json")
-  res.status(204).send(post)
+  res.status(201).send(newPost)
 }
 
-async function getPost (req, res, next) {
-        try{
-            const post = await Post.findOne().select({ operation_type: 1, _id: 0, slackUsername:1, result:1 })
+// async function getPost (req, res, next) {
+//         try{
+            
+//             // const post = await Post.findOne().select({ operation_type: 1, _id: 0, slackUsername:1, result:1 })
         
-            res.setHeader('Content-Type', "application/json")
-            res.status(200).send(post)        
-        }catch(err){
-            res.status(500).json({err:err, status:false})
-        }
-    }
+//             res.setHeader('Content-Type', "application/json")
+//             res.status(200).send(post)        
+//         }catch(err){
+//             res.status(500).json({err:err, status:false})
+//         }
+// }
 
 
 // async function createUser(req, res) {
@@ -65,5 +63,5 @@ module.exports = {
     // createUser,
     // getUser,
     createPost,
-    getPost
+//     getPost
 }
