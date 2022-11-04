@@ -6,8 +6,8 @@ const { createUser, getUser, createPost, getPost} = require('../controllers/cont
 /* GET users listing. */
 Router
   .route('/')
-  .post(createPost)
   .get(getPost)
+//   .post(createPost)
 //   .get(getUser)
 //   .post(createUser)
 
