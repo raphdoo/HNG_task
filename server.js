@@ -3,7 +3,7 @@ const cors = require("cors")
 const app = express()
 var { connectToDatabase } = require("./database")
 const config = require("./config")
-var usersRouter = require('./routes/user.route');
+var Router = require('./routes/route');
 
 
 connectToDatabase()
@@ -12,7 +12,7 @@ app.use(cors({
     origin: '*'
 }));
 
-app.use('/', usersRouter);
+app.use('/', Router);
 
 const port = config.port
 
