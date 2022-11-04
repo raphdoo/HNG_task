@@ -17,10 +17,10 @@ async function createPost(req, res) {
   } 
   await post.save()
 
-  const newPost = await Post.findOne({_id: post._id}).select({ operation_type: 1, _id: 0, slackUsername:1, result:1 })
+  const newPost = await Post.findOne({_id: post._id}).select({ _id: 0, slackUsername:1, result:1, operation_type: 1 })
 
   res.setHeader('Content-Type', "application/json")
-  res.status(201).json({newPost})
+  res.status(200).json(newPost)
 }
 
 // async function getPost (req, res, next) {
