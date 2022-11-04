@@ -26,7 +26,7 @@ async function createPost(req, res) {
 async function getPost (req, res, next) {
         try{
             
-            const post = await Post.findOne().select({ operation_type: 1, _id: 0, slackUsername:1, result:1 })
+            const post = await Post.find().select({ operation_type: 1, _id: 0, slackUsername:1, result:1 })
         
             res.setHeader('Content-Type', "application/json")
             res.status(200).send(post)        
